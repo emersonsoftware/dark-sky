@@ -4,12 +4,14 @@ const moment = require('moment');
 const queryString = require('query-string');
 
 class DarkSky {
-    constructor(apiKey) {
+    constructor(apiKey, options) {
         this.apiKey = apiKey;
         this.long = null;
         this.lat = null;
         this.t = null;
         this.query = {}
+        var url = options ? options.url : undefined
+        this.baseUrl = url || 'https://api.darksky.net'
     }
 
     longitude(long) {
@@ -48,7 +50,7 @@ class DarkSky {
     }
 
     generateReqUrl() {
-        this.url = `https://api.darksky.net/forecast/${this.apiKey}/${this.lat},${this.long}`;
+        this.url = `${this.baseUrl}/forecast/${this.apiKey}/${this.lat},${this.long}`;
         this.t ? this.url += `,${this.t}` : this.url;
         this.query ? this.url += `?${queryString.stringify(this.query)}` : this.url;
     }
