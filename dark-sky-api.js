@@ -2,9 +2,12 @@
 const req = require('request');
 const moment = require('moment');
 const queryString = require('query-string');
+const debug = require('debug')('darksky')
 
 class DarkSky {
     constructor(apiKey, options) {
+        debug('options: %o', options)
+        debug('apiKey: %s', apiKey)
         this.apiKey = apiKey;
         this.long = null;
         this.lat = null;
@@ -51,8 +54,11 @@ class DarkSky {
 
     generateReqUrl() {
         this.url = `${this.baseUrl}/forecast/${this.apiKey}/${this.lat},${this.long}`;
+        debug('url: %s', url)
         this.t ? this.url += `,${this.t}` : this.url;
+        debug('t: %s', t)
         this.query ? this.url += `?${queryString.stringify(this.query)}` : this.url;
+        debug('query: %s', query)
     }
 
     get() {
@@ -61,6 +67,7 @@ class DarkSky {
             this.generateReqUrl();
             req({ url: this.url, json: true }, (err, res, body) => {
                 if (err) {
+                    debug('req err: %s', err)
                     reject(`Forecast cannot be retrieved. ERROR: ${err}`)
                     return
                 }
