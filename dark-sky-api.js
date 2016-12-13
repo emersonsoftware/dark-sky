@@ -57,6 +57,7 @@ class DarkSky {
     }
 
     generateReqUrl() {
+      try {
         debug('generate from %o', this)
         this.url = `${this.baseUrl}/forecast/${this.apiKey}/${this.lat},${this.long}`;
         debug('url: %s', url)
@@ -64,6 +65,9 @@ class DarkSky {
         debug('t: %s', t)
         this.query ? this.url += `?${queryString.stringify(this.query)}` : this.url;
         debug('query: %s', query)
+      } catch(e) {
+        debug('wat: %o', err)
+      }
     }
 
     get() {
