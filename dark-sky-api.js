@@ -15,6 +15,7 @@ class DarkSky {
         this.query = {}
         var url = options ? options.url : undefined
         this.baseUrl = url || 'https://api.darksky.net'
+        debug('url: %s', this.baseUrl)
     }
 
     longitude(long) {
