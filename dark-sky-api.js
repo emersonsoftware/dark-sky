@@ -66,6 +66,7 @@ class DarkSky {
     }
 
     get() {
+        debug('get executed')
         return new Promise((resolve, reject) => {
             if(!this.lat || !this.long) reject("Request not sent. ERROR: Longitute or Latitude is missing.")
             this.generateReqUrl();
@@ -75,7 +76,9 @@ class DarkSky {
                     reject(`Forecast cannot be retrieved. ERROR: ${err}`)
                     return
                 }
+                debug('get res: %s', res.statusMessage)
                 res.statusCode !== 200 ? reject(`Forecast cannot be retrieved. Response: ${res.statusCode} ${res.statusMessage}`) : null;
+                debug('get body: %o', body)
                 resolve(body)
             })
         })
