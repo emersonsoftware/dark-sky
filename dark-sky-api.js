@@ -57,6 +57,7 @@ class DarkSky {
     }
 
     generateReqUrl() {
+        debug('generate from %o', this)
         this.url = `${this.baseUrl}/forecast/${this.apiKey}/${this.lat},${this.long}`;
         debug('url: %s', url)
         this.t ? this.url += `,${this.t}` : this.url;
