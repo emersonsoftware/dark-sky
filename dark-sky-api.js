@@ -18,11 +18,13 @@ class DarkSky {
     }
 
     longitude(long) {
+        debug('long: %s', long)
         !long ? null : this.long = long;
         return this;
     }
 
     latitude(lat) {
+        debug('lat: %s', lat)
         !lat ? null : this.lat = lat;
         return this;
     }
@@ -43,6 +45,7 @@ class DarkSky {
     }
 
     exclude(blocks) {
+        debug('exclude: %s', blocks)
         !blocks ? null : this.query.exclude = blocks;
         return this;
     }
